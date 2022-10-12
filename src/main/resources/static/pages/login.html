@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link href="../css/login.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="loginDiv" style="height: 350px">
+    <form id="form" :model="user">
+        <h1 id="loginMsg">登录页面</h1>
+        <div>{{errorMsg}}</div>
+        <div>{{loginMsg}}</div>
+        <p>用户名:<input id="username" name="username" type="text" v-model="user.username"></p>
+
+        <p>密码:<input id="password" name="password" type="password" v-model="user.password"></p>
+        <p>记住密码:<input id="remember" name="remember" type="checkbox" value="1" v-model="user.remember"></p>
+        <div id="subDiv">
+            <input type="button" value="登陆" @click="login()">
+            <input type="button" value="重置" @click="reset()">&nbsp;&nbsp;&nbsp;
+            <a href="register.html">没有账号？</a>
+        </div>
+    </form>
+</div>
+
+</body>
+
+<script src="../js/vue.js"></script>
+
+<script src="../plugins/elementui/index.js"></script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    var vue = new Vue({
+
+        el: '#loginDiv',
+        data:{
+            loginMsg:"",
+            errorMsg:"",
+            user: {
+                username:"",
+                password:"",
+                remember:""
+            }
+
+        },
+
+        //钩子函数，VUE对象初始化完成后自动执行
+        created() {
+            this.setnameandpassword()
+
+        },
+
+        methods: {
+            //列表
+            setnameandpassword() {
+                this.user.username = $.cookie('username');
+                this.user.password = $.cookie('password');
+                this.errorMsg = $.cookie('login_msg');
+            },
+            reset() {
+              this.user = {};
+                // window.location.replace("http://www.baidu.com")
+                // document.location.href = 'http://www.baidu.com'
+
+                // window.location.href='http://www.baidu.com'
+                // window.open("http://www.baidu.com")
+            },
+            login() {
+                //发送ajax请求
+                axios.post("/login",this.user).then((res)=>{
+
+                    // alert(JSON.stringify(this.user))
+                    // alert(JSON.stringify(res.data))
+                    if (res.data.code == 20041){
+                        window.location.href='/pages/guide.html'
+                    }else{
+                        this.errorMsg = res.data.msg
+
+                    }
+                });
+            },
+        }
+    })
+
+</script>
+</html>

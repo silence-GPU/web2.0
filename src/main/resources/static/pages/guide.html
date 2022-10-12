@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>杰杰猪猪个人网站</title>
+  <!-- Import style -->
+  <link href="../css/guide.css" rel="stylesheet">
+  <script src="../js/vue.js"></script>
+
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+
+  <script src="../js/axios-0.18.0.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <el-row class="tac">
+
+    <el-col :span="12">
+      <el-menu
+              default-active="2"
+              class="el-menu-vertical-demo"
+              @open="handleOpen"
+              @close="handleClose"
+              background-color="#545c64"
+              text-color="#fff"
+              active-text-color="#ffd04b">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>小杰私密空间🍑</span>
+          </template>
+          <el-menu-item-group>
+            <template slot="title">照片墙</template>
+            <el-menu-item index="1-1" @click="zhujie()">小🐷💗小🐘</el-menu-item>
+            <el-menu-item index="1-2" @click="hkdg()">神秘@01</el-menu-item>
+          </el-menu-item-group>
+
+        </el-submenu>
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <span slot="title" @click="wuziqi()">AI五子棋</span>
+        </el-menu-item>
+      </el-menu>
+    </el-col>
+  </el-row>
+
+
+
+</div>
+
+
+</body>
+
+
+<script>
+  var vue = new Vue({
+
+    el: '#app',
+    data:{
+
+
+    },
+
+    //钩子函数，VUE对象初始化完成后自动执行
+    created() {
+
+    },
+
+    methods: {
+      hkdg(){
+        window.location.href='/pages/hkdg.html'
+      },
+      wuziqi(){
+        window.location.href='/pages/five.html'
+      },
+      zhujie(){
+        window.location.href='/pages/photowall.html'
+      },
+
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  })
+</script>
+</html>

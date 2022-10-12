@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎注册</title>
+    <link href="../css/register.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-div">
+    <div class="reg-content">
+        <h1>欢迎注册</h1>
+        <span>已有帐号？</span> <a href="login.html">登录</a>
+    </div>
+    <form id="reg-form" action="#" method="get">
+
+        <table>
+
+            <tr>
+                <td>用户名</td>
+                <td class="inputs">
+                    <input name="username" type="text" id="username" v-model="user.username" @blur="username()">
+                    <br>
+                    <span id="username_err" class="err_msg" style="display: none">账号需要3-12位</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>密码</td>
+                <td class="inputs">
+                    <input name="password" type="password" id="password" v-model="user.password" @blur="password()">
+                    <br>
+                    <span id="password_err" class="err_msg" style="display: none">密码需要8-15位</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>验证码</td>
+                <td class="inputs">
+                    <input name="checkCode" type="text" id="checkCode" v-model="user.check_code">
+                    <img id="checkCodeImg" src="/check_code/45665">
+                    <a href="#" id="changeImg">看不清？</a>
+                </td>
+            </tr>
+
+        </table>
+
+        <div>{{registerMsg}}</div>
+        <div class="buttons">
+            <input value="注 册" type="button" id="reg_btn" @click="register()">
+        </div>
+        <br class="clear">
+    </form>
+
+</div>
+</body>
+<script src="../js/vue.js"></script>
+
+<script src="../plugins/elementui/index.js"></script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+
+
+    var vue = new Vue({
+
+        el: '#reg-form',
+        data:{
+            registerMsg:"",
+            user: {
+                username:"",
+                password:"",
+                check_code:""
+            },
+            flag:0
+
+        },
+
+        //钩子函数，VUE对象初始化完成后自动执行
+        created() {
+
+
+        },
+
+        methods: {
+            //列表
+            username() {
+                // alert(this.flag)
+                var reg = /^\w{3,12}$/;
+                if (!(reg.test(this.user.username))){
+                    document.getElementById("username_err").style.display="";
+                    this.flag = 1
+                }else {
+                    document.getElementById("username_err").style.display="none";
+                    this.flag = 0
+                }
+            },
+            password() {
+                var reg = /^[A-Za-z0-9]{8,15}$/;
+                if (!(reg.test(this.user.password))){
+                    document.getElementById("password_err").style.display="";
+                    this.flag = 1
+                }else {
+                    document.getElementById("password_err").style.display="none";
+                    this.flag = 0
+                }
+
+            },
+            register() {
+                if (this.flag==0){
+                    axios.post("/register",this.user).then((res)=>{
+
+                        // alert(JSON.stringify(this.user))
+                        // alert(JSON.stringify(res.data))
+                        this.registerMsg = res.data.msg
+
+
+                    });
+                }else {
+                    this.registerMsg = "请按照要求填写用户名与密码～"
+                }
+
+            },
+        }
+    })
+
+
+    document.getElementById("changeImg").onclick = function () {
+        document.getElementById("checkCodeImg").src = "/check_code/"+new Date().getMilliseconds();
+    }
+
+</script>
+</html>

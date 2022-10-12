@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>杰杰💗猪猪</title>
+  <link rel="stylesheet" href="../css/stylephotowall.css">
+  <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../css/demo.css">
+  <link rel="stylesheet" href="../css/style2.css">
+</head>
+<body>
+
+
+
+
+<canvas id="c1" width="1596" height="386"></canvas>
+<canvas id="c2" width="1596" height="386"></canvas>
+
+
+
+
+<audio src="../mp3/crhf.mp3" id="aud" autoplay="autoplay" controls="controls" preload="auto"></audio>
+<!--<video controls="true" autoplay="true" name="media" loop="true" hidden="true">-->
+<!--  <source src="../mp3/crhf.mp3" type="audio/mpeg">-->
+<!--</video>-->
+<div class="container">
+  <h1  id="app">👑{{username}}👑欢迎进入杰杰与猪猪回忆墙</h1>
+
+  <img onclick="imgEnlarge(this)" class="pic pic1" src="../img/1.jpg"/>
+  <img onclick="imgEnlarge(this)" class="pic pic2" src="../img/2.jpg" />
+  <img onclick="imgEnlarge(this)" class="pic pic3" src="../img/3.jpg" />
+  <img onclick="imgEnlarge(this)" class="pic pic4" src="../img/4.jpeg" />
+  <img onclick="imgEnlarge(this)" class="pic pic5" src="../img/5.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic6" src="../img/6.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/7.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/8.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/9.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/10.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/11.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/12.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic p" src="../img/13.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/14.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/15.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/16.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/17.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/18.jpeg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/19.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/20.pic.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/21.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/22.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/23.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/24.jpg" >
+  <img onclick="imgEnlarge(this)" class="pic pic7" src="../img/25.jpg" >
+</div>
+
+<div id="imgEnlargeDiv" style="display: none; text-align: center;position: fixed;z-index: 1000;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(255,255,255,.9);">
+  <img id="bigimg" style="height: 90%;width: auto;border: 0px;margin: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;" src="" />
+</div>
+
+
+</body>
+<script src="../js/index2.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+
+  $(function () {
+    $("#imgEnlargeDiv").click(function () {//再次点击淡出消失弹出层
+      $(this).fadeOut("fast");
+    });
+  });
+
+  function imgShow(outerdiv, bigimg, _this) {
+    var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
+    $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+    $(outerdiv).fadeIn("fast");  //图片放大的div快速淡入显示层
+  }
+
+  function imgEnlarge(_this) {
+    imgShow("#imgEnlargeDiv", "#bigimg", $(_this));
+    $("img[type ='showImg']").mouseover(function () {
+      $(this).css("cursor", "pointer");//鼠标移动到图片，鼠标箭头变为手势
+    });
+    $("img[type ='showImg']").click(function () {
+      var _this = $(this);//将当前的pimg元素作为_this传入函数
+      imgShow("#imgEnlargeDiv", "#bigimg", _this);
+    });
+  }
+
+</script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+  var vue = new Vue({
+
+    el: '#app',
+    data:{
+      username:"",
+
+    },
+
+    //钩子函数，VUE对象初始化完成后自动执行
+    created() {
+      this.getName();
+
+    },
+
+    methods: {
+      //列表
+      getName() {
+        // this.username = "";
+        this.username = $.cookie('username');
+        // alert(this.username)
+        // window.location.replace("http://www.baidu.com")
+        // document.location.href = 'http://www.baidu.com'
+
+        // window.location.href='http://www.baidu.com'
+        // window.open("http://www.baidu.com")
+      },
+
+    }
+  })
+</script>
+</html>
